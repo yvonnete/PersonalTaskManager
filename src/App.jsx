@@ -32,7 +32,7 @@ function App() {
   const addTask = (taskText) => {
     if (taskText.trim() !== "") {
       const newTask = {
-        id: Date.now() + Math.random(), // More unique ID to prevent conflicts
+        id: Date.now() + Math.random(),
         text: taskText.trim(),
         completed: false,
         createdAt: new Date().toISOString(),
@@ -49,40 +49,39 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
-  const completedCount = tasks.filter((task) => task.completed).length
-  const totalCount = tasks.length
+  const activeTasks = tasks.filter((task) => !task.completed)
+  const completedTasks = tasks.filter((task) => task.completed)
 
   return (
     <div className="app">
       <div className="container">
         <header className="header">
-          <h1>Personal Task Manager</h1>
-          <p>Stay organized and productive with your daily tasks</p>
+          <h1>Create Task</h1>
+          <p>Simple task management</p>
         </header>
 
         <TaskInput onAddTask={addTask} />
 
-        {tasks.length > 0 && (
-          <div className="task-stats">
-            <span>Total: {totalCount}</span>
-            <span>Completed: {completedCount}</span>
-            <span>Remaining: {totalCount - completedCount}</span>
+        {activeTasks.length > 0 && (
+          <div className="section">
+            <h2 className="section-title">Active ({activeTasks.length})</h2>
+            <TaskList tasks={activeTasks} onToggleTask={toggleTask} onDeleteTask={deleteTask} />
           </div>
         )}
 
-        <TaskList tasks={tasks} onToggleTask={toggleTask} onDeleteTask={deleteTask} />
+        {completedTasks.length > 0 && (
+          <div className="section">
+            <h2 className="section-title">Completed ({completedTasks.length})</h2>
+            <TaskList tasks={completedTasks} onToggleTask={toggleTask} onDeleteTask={deleteTask} />
+          </div>
+        )}
 
-       {tasks.length === 0 && (
-  <div className="empty-state">
-    <img
-      src="/clipboard-icon.jpg"
-      alt="No tasks"
-      className="empty-icon"
-      style={{ width: "100px", height: "100px" }}
-    />
-    <h3>No tasks yet</h3>
-    <p>Add your first task above to get started!</p>
-  </div>
+        {tasks.length === 0 && (
+          <div className="empty-state">
+            <div className="empty-icon">✓</div>
+            <h3>No tasks yet</h3>
+            <p>Add your first task above to get started</p>
+          </div>
         )}
       </div>
     </div>
