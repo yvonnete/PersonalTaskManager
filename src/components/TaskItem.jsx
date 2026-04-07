@@ -17,7 +17,7 @@ function TaskItem({ task, onToggle, onDelete }) {
       year: "numeric",
     })
   }
-
+ 
   return (
     <div className={`task-item ${task.completed ? "completed" : ""}`}>
       <div className="task-content">
