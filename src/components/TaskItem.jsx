@@ -18,7 +18,7 @@ function TaskItem({ task, onToggle, onDelete }) {
     })
   }
  
-  return (
+  return  (
     <div className={`task-item ${task.completed ? "completed" : ""}`}>
       <div className="task-content">
         <input type="checkbox" checked={task.completed} onChange={handleToggle} className="task-checkbox" />
