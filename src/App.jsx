@@ -18,7 +18,6 @@ function App() {
     }
     return []
   })
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
