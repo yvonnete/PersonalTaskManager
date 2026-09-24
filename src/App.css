@@ -3,7 +3,7 @@
   padding: 60px 20px;
   font-family: var(--font-sans);
   position: relative;
-}
+} 
 .app::before {
   content: "";
   position: fixed;
